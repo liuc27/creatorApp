@@ -1,0 +1,77 @@
+page-update {
+
+    z-index: 1;
+    background-color: white;
+
+    .flexWrap {
+    }
+
+    .button-icon-only ion-icon {
+      font-size: 2.2em;
+    }
+
+    ion-card.adv-map {
+      width: 100%;
+      margin: 0;
+    }
+
+    .bigImage {
+      height: 56.25vw;
+      width: 100vw;
+    }
+    
+    .fab-favorite {
+      position: absolute;
+      background-color: transparent;
+      top: 0.3em;
+      right: 0.6em;
+      font-size: 2.8rem;
+      color: white;
+      z-index: 50;
+    }
+
+    .fab-time {
+      position: absolute;
+      background-color: transparent;
+      bottom: 0em;
+      left: 0.3em;
+      font-size: 1.8rem;
+      text-align: center;
+      color: white;
+      z-index: 50;
+    }
+
+    ion-list {
+      margin: 0;
+    }
+
+    .cardIntroduction{
+      top:-2.0em;
+      font-size:1.3em;
+      margin-bottom:-1.6em;
+    }
+
+    ul {
+
+      &.rating {
+        margin: 0;
+        padding: 0 0 0.5em 0;
+        &li {
+        }
+        background: none;
+        color: #ffb400;
+        ion-icon {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  .buttonInMenu{
+    display: table-cell;
+    float: left;
+    width: 33.3%;
+    text-align:center;
+    font-size: 1.4em;
+  }
+

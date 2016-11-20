@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>上传</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="upload">
+
+  <ion-list>
+    <ion-item>
+      <ion-label primary>购买链接</ion-label>
+      <ion-input [(ngModel)]="product.link"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary>*类别</ion-label>
+      <ion-select [(ngModel)]="product.category">
+        <ion-option *ngFor="let key of categories">{{key}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <!--
+    <ion-item>
+      <ion-label primary>时间</ion-label>
+      <ion-datetime displayFormat="YYYY/MM/DD h:mm"
+                    pickerFormat="YYYY MM DD h mm"  [(ngModel)]="timeLimit"></ion-datetime>
+    </ion-item>
+-->
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label primary>*产品名</ion-label>
+      <ion-input [(ngModel)]="product.productName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary>*产品介绍</ion-label>
+      <ion-textarea [(ngModel)]="product.introduction"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label primary>*视频链接</ion-label>
+      <ion-input [(ngModel)]="product.videoURL"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label primary>花费时间</ion-label>
+      <ion-input [(ngModel)]="product.time"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label primary>原价</ion-label>
+      <ion-input [(ngModel)]="product.list"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary>折后价*</ion-label>
+      <ion-input [(ngModel)]="product.retail"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary>脸部产品名</ion-label>
+      <ion-input [(ngModel)]="product.face"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary>眼睛产品名</ion-label>
+      <ion-input [(ngModel)]="product.eye"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary>眉毛产品名</ion-label>
+      <ion-input [(ngModel)]="product.eyebrow"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary>鼻子产品名</ion-label>
+      <ion-input [(ngModel)]="product.nose"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label primary>嘴巴产品名</ion-label>
+      <ion-input [(ngModel)]="product.mouth"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label primary>*化妆师名</ion-label>
+      <ion-input [(ngModel)]="product.creatorName"></ion-input>
+    </ion-item>
+     <ion-item>
+      <ion-label primary>*password</ion-label>
+      <ion-input type="password" [(ngModel)]="product.password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-list>
+    <ion-item>
+      <label>*商品封面图片</label>
+      <input #label3 type="file" accept="image/*" (change)="uploadImage($event)">
+    </ion-item>
+
+
+    <ion-item>
+      <label>*脸部正面图片</label>
+      <input #label4 type="file" accept="image/*" (change)="uploadFaceImage($event)">
+    </ion-item>
+
+  </ion-list>
+
+
+
+
+  <button ion-button full [disabled]=buttonDisabled (tap)="replaceProduct()">Modify</button>
+
+  <!--
+  <div id="jsonDiv"> {{product | json }}</div>
+  -->
+</ion-content>

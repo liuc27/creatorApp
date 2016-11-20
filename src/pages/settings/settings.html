@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>register/login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="settings">
+
+  <ion-list>
+    <ion-item>
+      <ion-label primary>*化妆师名・Account</ion-label>
+      <ion-input [(ngModel)]="creator.creatorName"></ion-input>
+    </ion-item>
+
+     <ion-item>
+      <ion-label primary>*password</ion-label>
+      <ion-input type="password" [(ngModel)]="creator.password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label primary>*化妆师简介</ion-label>
+      <ion-textarea [(ngModel)]="creator.creatorIntroduction"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label primary>*化妆师级别</ion-label>
+      <ion-select [(ngModel)]="creator.creatorLevel">
+        <ion-option *ngFor="let key of categories">{{key}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label primary>化妆师Twitter</ion-label>
+      <ion-textarea [(ngModel)]="creator.creatorTitle"></ion-textarea>
+    </ion-item>
+    <ion-item>
+
+      <label>*化妆师图片</label>
+      <input #label2  type="file" accept="image/*" (change)="uploadcreatorImageURL($event)"  >
+    </ion-item>
+
+
+
+  </ion-list>
+
+
+
+
+
+  <button ion-button full [disabled]=buttonDisabled (tap)="replaceCreator()"> 添加</button>
+
+  <!--
+  <div id="jsonDiv"> {{creator | json }}</div>
+  -->
+
+
+    <ion-list [hidden]="alreadyLoggedIn.data">
+    <ion-item>
+      <ion-label primary>*化妆师名・Account</ion-label>
+      <ion-input [(ngModel)]="creator.creatorName"></ion-input>
+    </ion-item>
+
+     <ion-item>
+      <ion-label primary>*password</ion-label>
+      <ion-input type="password" [(ngModel)]="creator.password"></ion-input>
+    </ion-item>
+          <button ion-button full [disabled]=buttonDisabled (tap)="login()"> login</button>
+    </ion-list>
+  <div [hidden]="!alreadyLoggedIn.data" class="welcomeMessage">
+      Welcome, {{creatorValidation.creatorName}}!
+                <button ion-button full [disabled]=buttonDisabled (tap)="logout()"> logout</button>
+  </div>
+
+</ion-content>
