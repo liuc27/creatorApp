@@ -72,10 +72,10 @@ export class UploadPage {
   buttonDisabled : boolean;
 
   categories = [
-    '裸妆',
-    '脸雕',
-    '淡妆',
-    '夜妆',
+    'student',
+    'Animator specialist',
+    'gourmet',
+    'view spot guide',
   ]
 
   constructor(public navCtrl: NavController, private events: Events,
