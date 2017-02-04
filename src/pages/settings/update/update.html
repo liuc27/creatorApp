@@ -7,14 +7,14 @@
 <ion-content  #popoverContent>
 
   <ion-card class="adv-map" (tap)="modifySelfIntroduction(shop)">
-      <img [src]=shop.creatorImageURL>
+      <img [src]=shop.guiderImageURL>
     <a class="fab-favorite">
       <ion-icon name='build'></ion-icon>
     </a>
 
     <ion-card-content>
-      <ion-card-title>{{shop.creatorName}}</ion-card-title>
-      <p>{{shop.creatorIntroduction}}</p>
+      <ion-card-title>{{shop.guiderName}}</ion-card-title>
+      <p>{{shop.guiderIntroduction}}</p>
     </ion-card-content>
 
     <!--<ion-row style="padding: 0 0.5em" >
@@ -78,7 +78,7 @@
 
         <ion-item class="cardIntroduction">
           <span item-left >{{product.productName}}</span>
-          <span >{{product.creatorName}}</span>
+          <span >{{product.guiderName}}</span>
         </ion-item>
       </ion-card>
 

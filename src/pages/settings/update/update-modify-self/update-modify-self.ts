@@ -3,7 +3,7 @@ import { NavController, ToastController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import {CheckLogin} from '../../../providers/check-login'
+import {CheckLogin} from '../../../../providers/check-login'
 import {Storage} from '@ionic/storage'
 
 /*
@@ -23,22 +23,22 @@ export class UpdateModifySelfPage {
   Warper: any;
   Point: any;
   Animator: any;
-  creatorName: String;
+  guiderName: String;
   password: String;
-  creatorValidation = {
-    creatorName: undefined,
+  guiderValidation = {
+    guiderName: undefined,
     password: undefined
   }
   alreadyLoggedIn = {data:false};
 
 
-  public creator = {
-    creatorName: undefined,
+  public guider = {
+    guiderName: undefined,
     password: undefined,
-    creatorImageURL: "",
-    creatorIntroduction: undefined,
-    creatorTitle: undefined,
-    creatorLevel: undefined
+    guiderImageURL: "",
+    guiderIntroduction: undefined,
+    guiderTitle: undefined,
+    guiderLevel: undefined
   };
 
   uploadedImg = {data: undefined};
@@ -57,24 +57,24 @@ export class UpdateModifySelfPage {
 
 
   constructor(private params: NavParams,
-              public navCtrl: NavController, 
+              public navCtrl: NavController,
               private http: Http,
                        public storage:Storage,
                 public checkLogin:CheckLogin,
               private toastCtrl: ToastController
               ) {
 
-    this.creator = params.data.creatorInformation;
+    this.guider = params.data.guiderInformation;
 
     this.buttonDisabled = false;
     this.checkLogin.load()
         .then(data => {
-          this.creatorValidation = data
+          this.guiderValidation = data
           this.alreadyLoggedIn.data = true;
         });
               }
 
-   uploadCreatorImage(event) {
+   uploadGuiderImage(event) {
     console.log("upla")
     var eventTarget = event.srcElement || event.target;
     //console.log( eventTarget.files);
@@ -85,7 +85,7 @@ export class UpdateModifySelfPage {
     var self = this;
 
     reader.onload = function (e) {
-      self.creator.creatorImageURL = reader.result;
+      self.guider.guiderImageURL = reader.result;
       self.presentToast()
 
     }
@@ -106,41 +106,41 @@ export class UpdateModifySelfPage {
     toast.present();
   }
 
-  replaceCreator() {
+  replaceGuider() {
     this.buttonDisabled = true;
-    if (this.creator.creatorName) {
+    if (this.guider.guiderName) {
 
       var request: any = {};
 
 
 
-      if (this.creator.creatorName) {
-        request.creatorName = this.creator.creatorName;
+      if (this.guider.guiderName) {
+        request.guiderName = this.guider.guiderName;
       }
 
-      if (this.creator.password) {
-        request.password = this.creator.password;
+      if (this.guider.password) {
+        request.password = this.guider.password;
       }
 
-      if (this.creator.creatorImageURL) {
-        request.creatorImageURL = this.creator.creatorImageURL;
+      if (this.guider.guiderImageURL) {
+        request.guiderImageURL = this.guider.guiderImageURL;
       }
 
-      if (this.creator.creatorIntroduction) {
-        request.creatorIntroduction = this.creator.creatorIntroduction;
+      if (this.guider.guiderIntroduction) {
+        request.guiderIntroduction = this.guider.guiderIntroduction;
       }
 
-      if (this.creator.creatorLevel) {
-        request.creatorLevel = this.creator.creatorLevel;
+      if (this.guider.guiderLevel) {
+        request.guiderLevel = this.guider.guiderLevel;
       }
 
-      if (this.creator.creatorTitle) {
-        request.creatorTitle = this.creator.creatorTitle;
+      if (this.guider.guiderTitle) {
+        request.guiderTitle = this.guider.guiderTitle;
       }
 
       console.log(request);
 
-      this.http.post("http://localhost:8080/api/creatorRegister", request)
+      this.http.post("http://localhost:8080/api/guiderRegister", request)
               .map(res => res.json())
         .subscribe(data => {
             console.log(data.data);

@@ -27,7 +27,7 @@ export class getSelectedShopDetails {
       // We're using Angular Http provider to request the data,
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the data and resolve the promise with the new data.
-          this.http.post('http://localhost:8080/api/findProduct', query)
+          this.http.post('http://localhost:8080/api/findProductByGuiderName', query)
             .map(res => res.json())
             .subscribe(data => {
               console.log(data);

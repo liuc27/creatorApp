@@ -3,7 +3,7 @@ import { NavController, ToastController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import {CheckLogin} from '../../../providers/check-login'
+import {CheckLogin} from '../../../../providers/check-login'
 import {Storage} from '@ionic/storage'
 
 declare var ImgWarper: any;
@@ -25,10 +25,10 @@ export class UpdateModifyProductPage {
   Warper: any;
   Point: any;
   Animator: any;
-  creatorName: String;
+  guiderName: String;
   password: String;
-  creatorValidation = {
-    creatorName: undefined,
+  guiderValidation = {
+    guiderName: undefined,
     password: undefined
   }
   alreadyLoggedIn = {data:false};
@@ -37,7 +37,7 @@ export class UpdateModifyProductPage {
     productLevel: undefined,
     name: undefined,
     category: undefined,
-    creatorName: undefined,
+    guiderName: undefined,
     password:undefined,
     introduction: undefined,
     productName: undefined,
@@ -86,7 +86,7 @@ export class UpdateModifyProductPage {
   ]
 
   constructor(private params: NavParams,
-              public navCtrl: NavController, 
+              public navCtrl: NavController,
               private http: Http,
               private checkLogin:CheckLogin,
                        public storage:Storage,
@@ -95,8 +95,8 @@ export class UpdateModifyProductPage {
         this.checkLogin.load()
         .then(data => {
           this.product = this.params.data.product
-          this.creatorValidation = data
-          this.product.creatorName = data.creatorName;
+          this.guiderValidation = data
+          this.product.guiderName = data.guiderName;
           this.product.password = data.password;
           this.alreadyLoggedIn.data = true;
         });
@@ -257,8 +257,8 @@ export class UpdateModifyProductPage {
 
   replaceProduct() {
     this.buttonDisabled = true;
-    if (this.product.creatorName && this.product.productName) {
-      this.product.name = this.product.creatorName + "." + this.product.productName;
+    if (this.product.guiderName && this.product.productName) {
+      this.product.name = this.product.guiderName + "." + this.product.productName;
 
 
       console.log(this.product)
@@ -276,8 +276,8 @@ export class UpdateModifyProductPage {
       }
 
 
-      if (this.product.creatorName) {
-        request.creatorName = this.product.creatorName;
+      if (this.product.guiderName) {
+        request.guiderName = this.product.guiderName;
       }
 
       if (this.product.password) {

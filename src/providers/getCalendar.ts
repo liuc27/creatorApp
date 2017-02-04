@@ -10,9 +10,8 @@ import {Storage} from '@ionic/storage'
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class CheckLogin {
+export class GetCalendar {
 
-  guiderValidation : any = {};
   data: any;
 
   constructor(public http: Http, public storage:Storage) {
@@ -32,31 +31,19 @@ export class CheckLogin {
       // Next we process the data and resolve the promise with the new data.
 
       this.storage.get('guiderValidation').then(data1 => {
-        if (data1 != null && data1 != undefined) {
-          if (data1.guiderName != undefined) {
-            console.log("signIn")
-            this.http.post('http://localhost:8080/api/guiderLogin', data1)
+        if (data1) {
+          if (data1.guiderName&&data1.password) {
+            this.http.get('http://localhost:8080/api/createOffers?guiderName='+data1.guiderName+'&password='+data1.password)
               .map(res => res.json())
               .subscribe(data2 => {
                 // we've got back the raw data, now generate the core schedule data
                 // and save the data for later reference
-                if (data2 != null) {
-                  if (data2.data == "OK") {
-                    console.log(data2)
-                    this.storage.set('guiderValidation', data1);
-
-                    this.data = data1;
-                    console.log(this.data)
-                resolve(this.data);
-
-                  } else if (data2.data == "NO") {
-                    console.log("account already exists and the password was wrong")
-                                    resolve(this.data);
-
-                  } else {
-                    console.log(this.data)
-                    console.log("registered")
-                  }
+                if (data2 ) {
+                  console.log(data2)
+                  this.data = data2
+                  resolve(this.data)
+                }else{
+                  resolve(this.data)
                 }
 
               });

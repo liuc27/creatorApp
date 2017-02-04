@@ -9,38 +9,38 @@
   <ion-list>
     <ion-item>
       <ion-label primary>*化妆师名・Account</ion-label>
-      <ion-input [(ngModel)]="creator.creatorName"></ion-input>
+      <ion-input [(ngModel)]="guider.guiderName"></ion-input>
     </ion-item>
 
      <ion-item>
       <ion-label primary>*password</ion-label>
-      <ion-input type="password" [(ngModel)]="creator.password"></ion-input>
+      <ion-input type="password" [(ngModel)]="guider.password"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label primary>*化妆师简介</ion-label>
-      <ion-textarea [(ngModel)]="creator.creatorIntroduction"></ion-textarea>
+      <ion-textarea [(ngModel)]="guider.guiderIntroduction"></ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label primary>*化妆师级别</ion-label>
-      <ion-select [(ngModel)]="creator.creatorLevel">
+      <ion-select [(ngModel)]="guider.guiderLevel">
         <ion-option *ngFor="let key of categories">{{key}}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label primary>*化妆师头衔</ion-label>
-      <ion-textarea [(ngModel)]="creator.creatorTitle"></ion-textarea>
+      <ion-textarea [(ngModel)]="guider.guiderTitle"></ion-textarea>
     </ion-item>
     <ion-item>
 
       <label>*化妆师图片</label>
-      <input #label2  type="file" accept="image/*" (change)="uploadCreatorImage($event)"  >
-            <div>{{creator.creatorImageURL}}></div>
+      <input #label2  type="file" accept="image/*" (change)="uploadGuiderImage($event)"  >
+            <div>{{guider.guiderImageURL}}></div>
 
     </ion-item>
   </ion-list>
-  <button ion-button full [disabled]=buttonDisabled (tap)="replaceCreator()"> Modify</button>
+  <button ion-button full [disabled]=buttonDisabled (tap)="replaceGuider()"> Modify</button>
 
 </ion-content>

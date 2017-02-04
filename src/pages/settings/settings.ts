@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Events, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { UpdatePage } from './update/update';
 
 import {CheckLogin} from '../../providers/check-login'
 import {Storage} from '@ionic/storage'
@@ -20,22 +21,22 @@ export class SettingsPage {
   Warper: any;
   Point: any;
   Animator: any;
-  creatorName: String;
+  guiderName: String;
   password: String;
-  creatorValidation = {
-    creatorName: undefined,
+  guiderValidation = {
+    guiderName: undefined,
     password: undefined
   }
   alreadyLoggedIn = {data:false};
 
 
-  public creator = {
-    creatorName: undefined,
+  public guider = {
+    guiderName: undefined,
     password: undefined,
-    creatorImageURL: "",
-    creatorIntroduction: undefined,
-      creatorTitle:null,
-      creatorLevel:null
+    guiderImageURL: "",
+    guiderIntroduction: undefined,
+      guiderTitle:null,
+      guiderLevel:null
   };
 
   uploadedImg = {data: undefined};
@@ -65,13 +66,13 @@ export class SettingsPage {
     this.buttonDisabled = false;
     this.checkLogin.load()
         .then(data => {
-          this.creatorValidation = data
+          this.guiderValidation = data
           this.alreadyLoggedIn.data = true;
         });
   }
 
 
-  uploadcreatorImageURL(event) {
+  uploadguiderImageURL(event) {
     console.log("upla")
     var eventTarget = event.srcElement || event.target;
     //console.log( eventTarget.files);
@@ -82,7 +83,7 @@ export class SettingsPage {
     var self = this;
 
     reader.onload = function (e) {
-      self.creator.creatorImageURL = reader.result;
+      self.guider.guiderImageURL = reader.result;
       self.presentToast()
 
     }
@@ -104,17 +105,17 @@ export class SettingsPage {
   }
 
   login(){
-    this.creatorValidation.creatorName = this.creator.creatorName
-    this.creatorValidation.password = this.creator.password
-    console.log(this.creatorValidation)
-    this.http.post('http://localhost:8080/api/creatorLogin',this.creatorValidation)
+    this.guiderValidation.guiderName = this.guider.guiderName
+    this.guiderValidation.password = this.guider.password
+    console.log(this.guiderValidation)
+    this.http.post('http://localhost:8080/api/guiderLogin',this.guiderValidation)
       .map(res => res.json())
       .subscribe(data => {
         // we've got back the raw data, now generate the core schedule data
         // and save the data for later reference
         if(data.data == "OK"){
           console.log(data)
-          this.storage.set('creatorValidation',this.creatorValidation).then((data) => {
+          this.storage.set('guiderValidation',this.guiderValidation).then((data) => {
 
             if (data == null) console.log("error");
             else {
@@ -132,51 +133,51 @@ export class SettingsPage {
   }
 
 logout(){
-    this.creator.creatorName = null
-    this.creator.password = null
+    this.guider.guiderName = null
+    this.guider.password = null
 
     this.alreadyLoggedIn.data = false
     console.log(this.alreadyLoggedIn)
-        this.storage.remove('creatorValidation').then(data1 => {
+        this.storage.remove('guiderValidation').then(data1 => {
           console.log(data1)
-          console.log("data1")  
+          console.log("data1")
         })
 }
-  replaceCreator() {
+  replaceGuider() {
     this.buttonDisabled = true;
-    if (this.creator.creatorName) {
+    if (this.guider.guiderName) {
 
       var request: any = {};
 
 
 
-      if (this.creator.creatorName) {
-        request.creatorName = this.creator.creatorName;
+      if (this.guider.guiderName) {
+        request.guiderName = this.guider.guiderName;
       }
 
-      if (this.creator.password) {
-        request.password = this.creator.password;
+      if (this.guider.password) {
+        request.password = this.guider.password;
       }
 
-      if (this.creator.creatorImageURL) {
-        request.creatorImageURL = this.creator.creatorImageURL;
+      if (this.guider.guiderImageURL) {
+        request.guiderImageURL = this.guider.guiderImageURL;
       }
 
-      if (this.creator.creatorIntroduction) {
-        request.creatorIntroduction = this.creator.creatorIntroduction;
+      if (this.guider.guiderIntroduction) {
+        request.guiderIntroduction = this.guider.guiderIntroduction;
       }
 
-      if (this.creator.creatorLevel) {
-        request.creatorLevel = this.creator.creatorLevel;
+      if (this.guider.guiderLevel) {
+        request.guiderLevel = this.guider.guiderLevel;
       }
 
-      if (this.creator.creatorTitle) {
-        request.creatorTitle = this.creator.creatorTitle;
+      if (this.guider.guiderTitle) {
+        request.guiderTitle = this.guider.guiderTitle;
       }
 
       console.log(request);
 
-      this.http.post("http://localhost:8080/api/creatorRegister", request)
+      this.http.post("http://localhost:8080/api/guiderRegister", request)
               .map(res => res.json())
         .subscribe(data => {
             console.log(data.data);

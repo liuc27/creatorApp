@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      预约
+    </ion-title>
+  </ion-navbar>
+
+  <!-- <ion-navbar>
+        <ion-title>
+            讲师介绍
+        </ion-title>
+    </ion-navbar> -->
+
+</ion-header>
+
+<ion-content>
+  <ion-segment padding [(ngModel)]="serviceType">
+
+    <ion-segment-button value="guide" (ionSelect)="selectedGuide()">
+      Guide・Call
+    </ion-segment-button>
+    <ion-segment-button value="chat" (ionSelect)="selectedChat()">
+      TextChat
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="serviceType">
+
+    <div *ngSwitchCase="'guide'">
+      <ion-card class="highLightsCard">
+        <ion-card-header class="noPaddingLeftRight">Please make reservation by taping table cells</ion-card-header>
+        <ion-toolbar>
+          <ion-buttons start>
+            {{viewTitle}}
+          </ion-buttons>
+          <ion-buttons end>
+            <button ion-button (tap)="changeMode('month')">Month</button>
+            <button ion-button (tap)="changeMode('week')">Week</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-card>
+
+      <div class="calendarClass">
+        <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+            step="30">
+          </calendar>
+      </div>
+    </div>
+    <div *ngSwitchCase="'chat'">
+
+      <ion-card class="highLightsCard">
+        <ion-card-header class="noPaddingLeftRight">Please make reservation by taping table cells</ion-card-header>
+        <ion-toolbar>
+          <ion-buttons start>
+            {{viewTitle}}
+          </ion-buttons>
+          <ion-buttons end>
+            <button ion-button (tap)="changeMode('month')">Month</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-card>
+      <div></div>
+      <div class="calendarClass">
+        <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)"
+            step="30">
+          </calendar>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="nextStep">
+  <ion-toolbar (tap)="setReservationDetails()">
+    <ion-title>Next Step</ion-title>
+  </ion-toolbar>
+</ion-footer>

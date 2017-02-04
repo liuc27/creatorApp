@@ -1,0 +1,23 @@
+page-reservation {
+    background-color: white;
+    z-index: 1;
+    .calendarClass {
+        height: 70vh;
+    }
+    .weekview-allday-table{
+      display:none
+    }
+    .weekview-normal-event-container{
+      margin-top:37px
+    }
+    .noPaddingLeftRight{
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .highLightsCard {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+}

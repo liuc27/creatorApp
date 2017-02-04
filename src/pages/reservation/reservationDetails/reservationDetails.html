@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-navbar>
+
+    <ion-title>Reservation Page</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (tap)="shareActionSheet()">
+      <ion-icon name="share-alt"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="reservationDetails">
+  <ion-card class="adv-map">
+    <!--<div style="position: relative">
+        <ion-slides>
+          <ion-slide>
+            <div class="videoWrapper">
+              <iframe class="youtubeVideo"
+               [src]="url" frameborder="0" allowfullscreen>
+              </iframe>
+            </div>
+          </ion-slide>
+        </ion-slides>
+        <a class="fab-guider" (tap)="openGuiderDetailsPage(product.email)">
+          <ion-avatar >
+            <img src="img/card-saopaoloo.png">
+          </ion-avatar>
+        </a>
+      </div>-->
+    <div *ngFor="let event of eventSourceISO; let i = index " padding>
+      <ion-list>
+        <ion-list-header no-padding>
+          <ion-icon item-left name="add" (tap)="addReservation(i)"></ion-icon>
+          {{event.title}}{{i+1}}
+
+          <a item-right clear primary (tap)="cancellReservation(i)">
+                      cancell<ion-icon  name="close"></ion-icon>
+                    </a>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Start Time</ion-label>
+          <ion-datetime style="color:black;" min=2016 max="2020" displayFormat="YYYY/MM/DD HH:mm" pickerFormat="YYYY-MM-DDTHH" [(ngModel)]="event.startTime" (ionChange)="recaculateTotalDefaultPrice()"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>End Time</ion-label>
+          <ion-datetime min=2016 max=2020 displayFormat="YYYY/MM/DD HH:mm" pickerFormat="YYYY-MM-DDTHH" [(ngModel)]="event.endTime" (ionChange)="recaculateTotalDefaultPrice()"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Price per hour</ion-label>
+          <ion-note item-right style="color:black" (tap)=changeReservationPrice(event)>{{event.pricePerHour}}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Customers Number</ion-label>
+          <ion-note item-right style="color:black" (tap)=changeCustomerNumber(event)>{{event.userNumberLimit}}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>service Providers Number</ion-label>
+          <ion-note item-right style="color:black" (tap)=changeGuiderNumber(event)>{{event.guiderNumberLimit}}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-toggle checked="false"></ion-toggle>
+          <ion-label>
+            repeat for this month
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Max Revenue without deduction</ion-label>
+          <ion-note item-right style="color:black"> {{event.price}}</ion-note>
+        </ion-item>
+
+      </ion-list>
+
+    </div>
+    <ion-item>
+      <span item-right class="totalPrice">
+          Total Max Revenue : {{totalPrice}}
+        </span>
+    </ion-item>
+
+  </ion-card>
+
+
+  <!--<ion-card class="highLightsCard">
+      <div class="spaceLine"></div>
+      <ion-card-header>
+        About This Deal
+      </ion-card-header>
+      <ion-list >
+        <div ion-item>
+          detail
+        </div>
+      </ion-list>
+    </ion-card>-->
+
+  <ion-list>
+    <a ion-item (tap)="openOauth('applepay')">
+      <ion-avatar item-left>
+        <img src="assets/img/applepay.jpg">
+      </ion-avatar>
+      <ion-icon color="primary">&nbsp;ApplePay</ion-icon>
+    </a>
+    <a ion-item (tap)="openOauth('alipay')">
+      <ion-avatar item-left>
+        <img src="assets/img/alipay.jpg">
+      </ion-avatar>
+      <ion-icon color="primary">&nbsp;Alipay</ion-icon>
+    </a>
+    <a ion-item (tap)="openOauth('wechatpay')">
+      <ion-avatar item-left>
+        <img src="assets/img/wechatpay.jpg">
+      </ion-avatar>
+      <ion-icon color="primary">&nbsp;WechatPay</ion-icon>
+    </a>
+    <a ion-item (tap)="openOauth('unionpay')">
+      <ion-avatar item-left>
+        <img src="assets/img/unionpay.jpg">
+      </ion-avatar>
+      <ion-icon color="primary">&nbsp;UnionPay</ion-icon>
+    </a>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer class="nextStep">
+  <ion-toolbar (tap)="makeOffer()">
+    <ion-title>Make Offer</ion-title>
+  </ion-toolbar>
+</ion-footer>
