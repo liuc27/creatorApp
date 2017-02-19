@@ -1,0 +1,19 @@
+{
+  "name": "socialapp",
+  "dependencies": {
+    "aws-cloudfront-sign": "^2.2.0",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.13.2",
+    "express": "^5.0.0-alpha.2",
+    "express-rate-limiter": "*",
+    "express-useragent": "^0.1.9",
+    "ipware": "0.0.5",
+    "jwt-simple": "^0.3.0",
+    "lodash": "^3.10.0",
+    "mongoose": "^4.8.1",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "^1.6.1",
+    "node-localstorage": "^0.5.1",
+    "weixin-api": "*"
+  }
+}

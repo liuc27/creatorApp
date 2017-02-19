@@ -18,51 +18,15 @@ export class UploadPage {
   Warper: any;
   Point: any;
   Animator: any;
-  creatorName: String;
+  guiderName: String;
   password: String;
-  creatorValidation = {
-    creatorName: undefined,
+  guiderValidation = {
+    guiderName: undefined,
     password: undefined
   }
   alreadyLoggedIn = {data:false};
 
-  public product = {
-    productLevel: undefined,
-    name: undefined,
-    category: undefined,
-    creatorName: undefined,
-    password:undefined,
-    introduction: undefined,
-    productName: undefined,
-    time: undefined,
-    link: null,
-    score: undefined,
-    face: undefined,
-    eye: undefined,
-    nose: undefined,
-    mouth: undefined,
-    hair: undefined,
-    eyebrow: undefined,
-    face2: undefined,
-    eye2: undefined,
-    nose2: undefined,
-    mouth2: undefined,
-    hair2: undefined,
-    eyebrow2: undefined,
-    faceImagePoints: undefined,
-    faceImageHeight:undefined,
-    faceImageWidth:undefined,
-
-    list: undefined,
-    retail: undefined,
-    percentageSaving: undefined,
-    instructor: undefined,
-    image: undefined,
-    faceImage: undefined,
-    videoURL: undefined,
-    quantity: undefined,
-    issueTime: undefined
-  };
+  public product:any = {};
 
   uploadedImg = {data: undefined};
   f = {api_key: undefined, api_id: undefined, api_secret: undefined, img: undefined, face_id: undefined,category:undefined};
@@ -72,10 +36,15 @@ export class UploadPage {
   buttonDisabled : boolean;
 
   categories = [
-    'student',
-    'Animator specialist',
-    'gourmet',
-    'view spot guide',
+    'funding',
+    'investment',
+    'beauty',
+    'accounting',
+        'language',
+    'operator',
+    'skill',
+    'childcare',
+        'true'
   ]
 
   constructor(public navCtrl: NavController, private events: Events,
@@ -87,8 +56,8 @@ export class UploadPage {
     this.buttonDisabled = false;
         this.checkLogin.load()
         .then(data => {
-          this.creatorValidation = data
-          this.product.creatorName = data.creatorName;
+          this.guiderValidation = data
+          this.product.guiderName = data.guiderName;
           this.product.password = data.password;
           this.alreadyLoggedIn.data = true;
         });
@@ -115,7 +84,7 @@ export class UploadPage {
     var self = this;
 
     reader.onload = function (e) {
-      self.product.image = reader.result;
+      self.product.imageURL = reader.result;
       self.presentToast()
 
     }
@@ -249,103 +218,13 @@ export class UploadPage {
 
   replaceProduct() {
     this.buttonDisabled = true;
-    if (this.product.creatorName && this.product.productName) {
-      this.product.name = this.product.creatorName + "." + this.product.productName;
+    if (this.product.guiderName && this.product.productName) {
+      this.product.name = this.product.guiderName + "." + this.product.productName;
 
 
       console.log(this.product)
-      var request: any = {};
 
-
-      if (this.product.name) {
-        request.name = this.product.name;
-      }
-      if (this.product.category) {
-        request.category = this.product.category;
-      }
-      if (this.product.productLevel) {
-        request.productLevel = this.product.productLevel;
-      }
-
-
-      if (this.product.creatorName) {
-        request.creatorName = this.product.creatorName;
-      }
-
-      if (this.product.password) {
-        request.password = this.product.password;
-      }
-
-      if (this.product.introduction) {
-        request.introduction = this.product.introduction;
-      }
-      if (this.product.time) {
-        request.time = this.product.time;
-      }
-      if (this.product.quantity) {
-        request.quantity = this.product.quantity;
-      }
-
-      if (this.product.score) {
-        request.score = this.product.score;
-      }
-      if (this.product.productName) {
-        request.productName = this.product.productName;
-      }
-      if (this.product.link) {
-        request.link = this.product.link;
-      }
-      if (this.product.list) {
-        request.list = this.product.list;
-      }
-      if (this.product.retail) {
-        request.retail = this.product.retail;
-      }
-      if (this.product.face) {
-        request.face = this.product.face;
-      }
-      if (this.product.eye) {
-        request.eye = this.product.eye;
-      }
-      if (this.product.eyebrow) {
-        request.eyebrow = this.product.eyebrow;
-      }
-      if (this.product.nose) {
-        request.nose = this.product.nose;
-      }
-      if (this.product.mouth) {
-        request.mouth = this.product.mouth;
-      }
-      if (this.product.hair) {
-        request.hair = this.product.hair;
-      }
-      if (this.product.eyebrow) {
-        request.eyebrow = this.product.eyebrow;
-      }
-      if (this.product.faceImagePoints) {
-        request.faceImagePoints = this.product.faceImagePoints;
-      }
-      if (this.product.videoURL) {
-        request.videoURL = this.product.videoURL;
-      }
-
-      if (this.product.image) {
-        request.imageURL = this.product.image;
-      }
-      if (this.product.faceImage) {
-        request.faceImageURL = this.product.faceImage;
-      }
-      if (this.product.faceImageHeight) {
-        request.faceImageHeight = this.product.faceImageHeight;
-      }
-
-      if (this.product.faceImageWidth) {
-        request.faceImageWidth = this.product.faceImageWidth;
-      }
-
-      console.log(request);
-
-      this.http.post("http://localhost:8080/api/product", request)
+      this.http.post("http://localhost:8080/api/product", this.product)
         .subscribe(data => {
             console.log(data);
             alert(data.statusText)

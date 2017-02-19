@@ -12,15 +12,11 @@ import {Storage} from '@ionic/storage'
 @Injectable()
 export class CheckLogin {
 
-  validation = {
-    creatorName: undefined,
-    password: undefined
-  };
+  guiderValidation : any = {};
   data: any;
 
-  constructor(public http: Http, public storage:Storage,) {
+  constructor(public http: Http, public storage:Storage) {
     this.data = null;
-
   }
 
   load() {
@@ -35,11 +31,11 @@ export class CheckLogin {
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the data and resolve the promise with the new data.
 
-      this.storage.get('creatorValidation').then(data1 => {
+      this.storage.get('guiderValidation').then(data1 => {
         if (data1 != null && data1 != undefined) {
-          if (data1.creatorName != undefined) {
+          if (data1.guiderName != undefined) {
             console.log("signIn")
-            this.http.post('http://localhost:8080/api/creatorLogin', data1)
+            this.http.post('http://localhost:8080/api/guiderLogin', data1)
               .map(res => res.json())
               .subscribe(data2 => {
                 // we've got back the raw data, now generate the core schedule data
@@ -47,7 +43,7 @@ export class CheckLogin {
                 if (data2 != null) {
                   if (data2.data == "OK") {
                     console.log(data2)
-                    this.storage.set('creatorValidation', data1);
+                    this.storage.set('guiderValidation', data1);
 
                     this.data = data1;
                     console.log(this.data)
